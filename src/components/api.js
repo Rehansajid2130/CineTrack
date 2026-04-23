@@ -23,18 +23,18 @@ export async function TopRated(page) {
     const TopRated = await response.json()
     return TopRated
 }
-export async function Trending() {
+export async function Trending(page) {
     const response = await fetch(`${BASE_URL}trending/all/day?language=en-US&page=${page}` ,  options
     )
     const Trending = await response.json()
     return Trending
 }
 
-export async function Searched(SearchInput) {
-    const response = await fetch(`${BASE_URL}search/movie?query=${SearchInput}&include_adult=false&language=en-US&page=1` ,  options
+export async function Searched(SearchInput,page) {
+    const response = await fetch(`${BASE_URL}search/movie?query=${SearchInput}&include_adult=false&language=en-US&page=${page}` ,  options
     )
-    const Trending = await response.json()
-    return Trending
+    const search = await response.json()
+    return search
 }
 export async function MovieDetails(id){
     const response = await fetch(`${BASE_URL}movie/${id}`, options)
@@ -63,7 +63,21 @@ export async function MovieRecommond(id){
 export async function genre(){
     const response = await fetch(`${BASE_URL}genre/movie/list?language=en`, options)
     const genre = await response.json()
-    console.log(genre);
-    
     return genre;
+}
+export async function genre1(){
+    const response = await fetch(`${BASE_URL}genre/movie?language=en`, options)
+    const gen = await response.json()
+    console.log(gen);
+    return gen;
+}
+
+export async function Discovergenre(id,PageNo) {
+
+    const response = await fetch(`${BASE_URL}discover/movie?&with_genres=${id}&language=en-US&page=${PageNo}`,
+       options
+    )
+    const discovergenre = await response.json()
+    return discovergenre
+    console.log(discovergenre);
 }

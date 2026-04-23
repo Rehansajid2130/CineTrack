@@ -8,8 +8,7 @@ const MainPage = () => {
 
   return (
     <Container gap={"100px"} display={"flex"} flexDir={"column"}>
-      <VStack>
-     
+      <VStack>  
         <VStack>
           <Text as={"span"} fontSize={150} fontWeight={900}>
             CINETRACK

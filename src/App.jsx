@@ -9,23 +9,22 @@ import "./App.css"
 import MoviePage from './components/MoviePage'
 import Footer from './components/Footer'
 import Category from './components/Category'
+import LoadingState from './components/LoadingState'
+import ErrorState from './components/ErrorState'
 
 const App = () => {
-  const [Data, setData] = useState()
-
   return (
   <Container w={"100%"} bgColor={""} display={"flex"} flexWrap={"wrap"}>
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<MainPage />}/>
       <Route path="/ExplorePage" element={<ExplorePage />}/>
-      <Route path='MoviePage' element={<MoviePage />} />
+      <Route path='MoviePage/:id' element={<MoviePage />} />
       <Route path='Category' element={<Category />} />
     </Routes>
     </BrowserRouter>
-    
-    {/* <MovieList /> */}
 
+    {/* <MovieList /> */}
     <Footer />
   </Container>
   )
