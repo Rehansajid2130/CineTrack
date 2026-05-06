@@ -38,7 +38,7 @@ const MoviePage = () => {
             console.log(error);
             setIsError(true)
         }
-    }, [NoReviews])
+    }, [id])
     console.log(Similar);
 
     console.log(Data);
@@ -166,7 +166,7 @@ const MoviePage = () => {
                     <HStack gap={5} w={"100%"} display={'flex'} flexDir={"column"} >
                         {Recommend.results?.slice(0, 4).map((Similar, index) => {
                             return (
-                                <Link key={index} to={`/MoviePage/${Recommend.id}`} >
+                                <Link key={index} to={`/MoviePage/${Similar.id}`} >
                                     <MovieSIcon title={Similar.original_title}
                                         vote_average={Similar.vote_average}
                                         poster_path={Similar.poster_path}

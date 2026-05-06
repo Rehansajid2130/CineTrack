@@ -3,14 +3,13 @@ import { useEffect, useState } from 'react'
 import MovieIcon from './MovieIcon'
 import Navbar from './Navbar'
 import { DiscoverMovies, TopRated, Trending, Searched } from './api'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import LoadingState from './LoadingState'
 import ErrorState from './ErrorState'
 import TopSearching from './TopSearching'
 
 
 const ExplorePage = () => {
-
     const [Data, setData] = useState("")
     const [Catogery, setCatogery] = useState("Discover")
     const [Searching, setSearching] = useState(false)
@@ -18,6 +17,9 @@ const ExplorePage = () => {
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
     const [SearchInput, setSearchInput] = useState("")
+
+    let [MainSearch , setMainSearch] = useSearchParams()
+    let q = MainSearch.get("q")
 
 
     useEffect(() => 
@@ -30,7 +32,13 @@ const ExplorePage = () => {
             {
                 setIsLoading(false)
             }
-            if (Catogery === "Discover") {
+            if(q!=""){
+                setSearchInput(q)
+                console.log(q)
+                setSearching(true)
+                setMainSearch[{}]
+             }
+            else if (Catogery === "Discover") {
                 DiscoverMovies(PageNo)
                     .then(Discover => setData(Discover))
                 console.log(Data);
@@ -60,10 +68,8 @@ const ExplorePage = () => {
             setPageNo(1)
             Searched(SearchInput,PageNo).then(Searchput => setData(Searchput))
             console.log(SearchInput);
-            console.log("Running search");
             setIsLoading(false)
     }
-
     const paging = (num) => {
         if (num === 1) {
             if (PageNo < Data.total_pages)
@@ -81,7 +87,7 @@ const ExplorePage = () => {
         <Container w={"100%"} bgColor={""} display={"flex"} flexDir={"column"} >
             <Navbar />
       
-        <TopSearching Catogery={Catogery} setCatogery={setCatogery} setSearching = {setSearching} setPageNo={setPageNo} setSearchInput={setSearchInput} SearchInput={SearchInput}             searchInputData={searchInputData} PageNo={PageNo} />
+        <TopSearching Catogery={Catogery} setCatogery={setCatogery} setSearching = {setSearching} setPageNo={setPageNo} setSearchInput={setSearchInput} SearchInput={SearchInput}  searchInputData={searchInputData} PageNo={PageNo} />
            
             <HStack>
                 <Text as={"span"} marginLeft={"60px"} padding={"5px 10px"} bgColor={"pink"} borderRadius={5} fontSize={25}>
@@ -94,7 +100,7 @@ const ExplorePage = () => {
                         <VStack key={index} >
                             <Link key={Data.id} to={`/MoviePage/${Data.id}`}>
                             <MovieIcon title={Data.title ?? Data.name} vote_average={Data.vote_average} poster_path={Data.poster_path} />
-                </Link>
+                        </Link>
                         </VStack>
                     )
                 })}

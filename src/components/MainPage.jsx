@@ -1,14 +1,14 @@
-import { Container, HStack, Text, VStack, Button, Input } from '@chakra-ui/react'
-import { useNavigate } from 'react-router-dom'
-import ExplorePage from './ExplorePage'
-import Navbar from './Navbar'
-import { genre } from './api'
+import { Container, HStack, Text, VStack, Button, Input, useStatStyles } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom'    
+import { useState } from 'react'
+
 const MainPage = () => {
   const navigate = useNavigate()
+  const [Search, setSearch] = useState("")
 
   return (
     <Container gap={"100px"} display={"flex"} flexDir={"column"}>
-      <VStack>  
+      <VStack> 
         <VStack>
           <Text as={"span"} fontSize={150} fontWeight={900}>
             CINETRACK
@@ -19,11 +19,25 @@ const MainPage = () => {
         </VStack>
       </VStack>
       <VStack w={"100%"} bgColor={""} gap={"40px"}>
-        <VStack w={"50%"}>
+        <HStack w={"50%"}>
           <Input type="text"
             placeholder='Search'
+            value={Search}
+            onChange={(e)=>{
+            setSearch(e.target.value)
+            }}
           />
-        </VStack>
+          <Button onClick={()=>{
+            if(Search === ""){
+              return
+            }
+            else{
+              navigate(`/ExplorePage?q=${encodeURIComponent(Search)}`)
+            }
+          }}>
+            Search
+          </Button>
+        </HStack>
         <HStack >
           <Button onClick={() => {
             navigate("/ExplorePage")
