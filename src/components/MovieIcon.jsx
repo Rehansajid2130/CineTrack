@@ -6,7 +6,7 @@ const MovieIcon = ({title , vote_average ,poster_path}) => {
     <Container w={"200px"} alignItems={"center"} wordWrap={"break-word"} maxH={"400px"} justifyContent={"center"} position={"relative"} bgColor={""} h={"350px"} wordBreak={"break-word"} textAlign={"center"} > 
     <VStack position={"absolute"} bgColor={"black"} p={"5px 10px" } alignItems={"flex-end"} display={"flex"} right={"1px"} top={"1px"} borderRadius={"9px"} fontSize={12} fontWeight={700}>
 
-      {vote_average.toFixed(1)}
+      {vote_average}
     </VStack>
       <Image
         src={poster_path?`https://image.tmdb.org/t/p/w500${poster_path}` : DefaultMovie}
@@ -14,7 +14,7 @@ const MovieIcon = ({title , vote_average ,poster_path}) => {
         w={"200px"}
         h={"300px"}
         borderRadius={"10px"}
-        display={"block"}
+        display={"block"} 
         objectFit={"cover"}
       />
       <Text as={"span"} fontSize={15} fontWeight={700} >

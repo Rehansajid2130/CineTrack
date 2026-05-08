@@ -1,4 +1,4 @@
-import { Container, HStack, Text ,VStack ,Button ,Input , Image} from '@chakra-ui/react'
+import { Container, HStack, Text ,VStack ,Button ,Input , Image, Box} from '@chakra-ui/react'
 import MainPage from './components/MainPage'
 import MovieList from './components/MovieList'
 import { useEffect, useState } from 'react'
@@ -11,6 +11,7 @@ import Footer from './components/Footer'
 import Category from './components/Category'
 import LoadingState from './components/LoadingState'
 import ErrorState from './components/ErrorState'
+import SearchPage from './components/SearchPage'
 
 const App = () => {
   return (
@@ -23,6 +24,9 @@ const App = () => {
       <Route path='Category' element={<Category />} />
     </Routes>
     </BrowserRouter>
+    <Box  w={"100%"} h={"100vh"} >
+
+    </Box>
 
     {/* <MovieList /> */}
     <Footer />

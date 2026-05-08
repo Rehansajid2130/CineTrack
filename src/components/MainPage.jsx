@@ -1,6 +1,7 @@
-import { Container, HStack, Text, VStack, Button, Input, useStatStyles } from '@chakra-ui/react'
+import { Container, HStack, Text, VStack, Button, Input, useStatStyles, Box } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'    
 import { useState } from 'react'
+import SearchPage from './SearchPage'
 
 const MainPage = () => {
   const navigate = useNavigate()

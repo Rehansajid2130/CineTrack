@@ -7,6 +7,8 @@ import { Link, useSearchParams } from 'react-router-dom'
 import LoadingState from './LoadingState'
 import ErrorState from './ErrorState'
 import TopSearching from './TopSearching'
+import SearchPage from '../components/SearchPage'
+
 
 
 const ExplorePage = () => {
@@ -17,10 +19,7 @@ const ExplorePage = () => {
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
     const [SearchInput, setSearchInput] = useState("")
-
-    let [MainSearch , setMainSearch] = useSearchParams()
-    let q = MainSearch.get("q")
-
+    const [Searched, setSearched] = useState(false)
 
     useEffect(() => 
         {
@@ -32,13 +31,7 @@ const ExplorePage = () => {
             {
                 setIsLoading(false)
             }
-            if(q!=""){
-                setSearchInput(q)
-                console.log(q)
-                setSearching(true)
-                setMainSearch[{}]
-             }
-            else if (Catogery === "Discover") {
+            if (Catogery === "Discover") {
                 DiscoverMovies(PageNo)
                     .then(Discover => setData(Discover))
                 console.log(Data);
@@ -64,12 +57,7 @@ const ExplorePage = () => {
         }
         setIsLoading(false)
     }, [Catogery, Searching, PageNo])
-    const searchInputData = (SearchInput,PageNo) => {
-            setPageNo(1)
-            Searched(SearchInput,PageNo).then(Searchput => setData(Searchput))
-            console.log(SearchInput);
-            setIsLoading(false)
-    }
+
     const paging = (num) => {
         if (num === 1) {
             if (PageNo < Data.total_pages)
@@ -83,12 +71,18 @@ const ExplorePage = () => {
 
     if (isLoading) return <LoadingState />
     if (isError) return <ErrorState />
+    if (Searched) return <SearchPage />
+
     return (
         <Container w={"100%"} bgColor={""} display={"flex"} flexDir={"column"} >
             <Navbar />
       
-        <TopSearching Catogery={Catogery} setCatogery={setCatogery} setSearching = {setSearching} setPageNo={setPageNo} setSearchInput={setSearchInput} SearchInput={SearchInput}  searchInputData={searchInputData} PageNo={PageNo} />
-           
+        <TopSearching Catogery={Catogery} setCatogery={setCatogery} setSearching = {setSearching} setPageNo={setPageNo} setSearchInput={setSearchInput} SearchInput={SearchInput}  PageNo={PageNo} />
+           <Button onClick={()=>{
+            setSearched(true)
+           }}>
+            Click
+           </Button>
             <HStack>
                 <Text as={"span"} marginLeft={"60px"} padding={"5px 10px"} bgColor={"pink"} borderRadius={5} fontSize={25}>
                     {Catogery} Movies
