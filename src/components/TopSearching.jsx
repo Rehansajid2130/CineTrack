@@ -1,9 +1,8 @@
 import { Container, HStack, VStack, Box, Button, Portal, Menu, Input } from '@chakra-ui/react'
-import {useState} from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import {  useNavigate } from 'react-router-dom'
 
-const TopSearching = ({ Catogery, setCatogery, setSearching, setPageNo,setSearchInput ,SearchInput,searchInputData,PageNo}) => {
-    const navigate =useNavigate()
+const TopSearching = ({ setCatogery, setSearched, setPageNo,TrendingMv}) => {
+    const navigate = useNavigate()
     return (
         <Container w={"100%"} bgColor={""} h={"fit-content"} display={"flex"} justifyContent={"space-around"}>
             <HStack w={"10%"} bgColor={""} h={"fit-content"} >
@@ -36,25 +35,20 @@ const TopSearching = ({ Catogery, setCatogery, setSearching, setPageNo,setSearch
                         </Menu.Positioner>
                     </Portal>
                 </Menu.Root>
-                <Button onClick={()=>{
+                <Button onClick={() => {
                     navigate("/Category")
-
-}}>Categories</Button>
+                }}>Categories
+                </Button>
             </HStack>
             <HStack w={"40%"} bgColor={""}>
-            <Input placeholder='Enter Movie Name'
-            value={SearchInput}
-            onChange={(e)=>{
-                setSearchInput(e.target.value)
-            }}
-            />
-            <Button onClick={() => {
-                setSearching(true)
-                setCatogery("")
-            }}
-            w={"20%"} 
-            >Search</Button>
-        </HStack>
+
+            <Button onClick={()=>{
+            setSearched(true)
+            navigate("/SearchPage", { state: { trendingMv: TrendingMv } })
+        }}>
+            Click
+            </Button>
+            </HStack>
         </Container>
     )
 }

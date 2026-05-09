@@ -33,7 +33,7 @@ const MainPage = () => {
               return
             }
             else{
-              navigate(`/ExplorePage?q=${encodeURIComponent(Search)}`)
+              navigate(`/SearchPage?q=${encodeURIComponent(Search)}`)
             }
           }}>
             Search
