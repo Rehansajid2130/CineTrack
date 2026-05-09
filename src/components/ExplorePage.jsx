@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import MovieIcon from './MovieIcon'
 import Navbar from './Navbar'
 import { DiscoverMovies, TopRated, Trending, Searched } from './api'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, Navigate, useNavigate, useSearchParams } from 'react-router-dom'
 import LoadingState from './LoadingState'
 import ErrorState from './ErrorState'
 import TopSearching from './TopSearching'
@@ -20,11 +20,18 @@ const ExplorePage = () => {
     const [isError, setIsError] = useState(false)
     const [SearchInput, setSearchInput] = useState("")
     const [Searched, setSearched] = useState(false)
+    const [TrendingMv, setTrendingMv] = useState("")
+
+    const navigate = useNavigate()
 
     useEffect(() => 
         {
         setIsLoading(true)
         setIsError(false)
+
+        Trending(PageNo)
+        .then(trending => setTrendingMv(trending))
+    console.log(Data);
 
         try {
             if(Searching)
@@ -71,18 +78,14 @@ const ExplorePage = () => {
 
     if (isLoading) return <LoadingState />
     if (isError) return <ErrorState />
-    if (Searched) return <SearchPage />
 
     return (
         <Container w={"100%"} bgColor={""} display={"flex"} flexDir={"column"} >
             <Navbar />
-      
-        <TopSearching Catogery={Catogery} setCatogery={setCatogery} setSearching = {setSearching} setPageNo={setPageNo} setSearchInput={setSearchInput} SearchInput={SearchInput}  PageNo={PageNo} />
-           <Button onClick={()=>{
-            setSearched(true)
-           }}>
-            Click
-           </Button>
+        <TopSearching setCatogery={setCatogery} setPageNo={setPageNo}
+        setSearched={setSearched}
+        TrendingMv={TrendingMv}
+        />
             <HStack>
                 <Text as={"span"} marginLeft={"60px"} padding={"5px 10px"} bgColor={"pink"} borderRadius={5} fontSize={25}>
                     {Catogery} Movies

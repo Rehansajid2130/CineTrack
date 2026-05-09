@@ -33,8 +33,7 @@ const MoviePage = () => {
             setComments(total > 0)
             CommentTuring()
             setIsLoading(false)
-        } catch (error)
-        {
+        } catch (error) {
             console.log(error);
             setIsError(true)
         }
@@ -51,8 +50,8 @@ const MoviePage = () => {
             setComments(true)
         }
     }
-    if(isLoading) return <LoadingState />
-    if(isError) return <ErrorState />
+    if (isLoading) return <LoadingState />
+    if (isError) return <ErrorState />
     return (
         <Container bgColor={""} w={"100%"} mx={'auto'} maxW={"1300px"} h={'fit-content'} >
             <Navbar />
@@ -80,7 +79,7 @@ const MoviePage = () => {
                         <HStack alignItems={"flex-start"}
                             w={300} bgColor={""} justifyContent={"space-between"}>
 
-                            <Text>Rating :{Data.vote_average}</Text>
+                            <Text>Rating :{Data.vote_average.toFixed(1)}</Text>
                             <Text>2h 22m</Text>
                             <Text>{Data.release_date?.slice(0, 4)}</Text>
                             <Text>HD</Text>
@@ -112,7 +111,7 @@ const MoviePage = () => {
                     Related Movies
                 </Text>
                 <HStack>
-                
+
                     <HStack gap={5} w={"100%"} >
 
                         {Similar.results?.slice(0, 6).map((Similar, index) => {
@@ -121,17 +120,17 @@ const MoviePage = () => {
                                     <MovieIcon title={Similar.original_title}
                                         vote_average={Similar.vote_average}
                                         poster_path={Similar.poster_path}
-                                        />
+                                    />
                                 </Link>
                             )
                         })}</HStack>
-                        
+
                 </HStack>
             </Box>
 
             <Box w={"100%"} marginTop={20}>
                 <Image src={`https://image.tmdb.org/t/p/w500${Data.backdrop_path}`}
-                    w={"100%"} h={"fit-content"} objectFit={"cover"}/>
+                    w={"100%"} h={"fit-content"} objectFit={"cover"} />
             </Box>
 
 

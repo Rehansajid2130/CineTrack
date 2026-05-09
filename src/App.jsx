@@ -22,6 +22,7 @@ const App = () => {
       <Route path="/ExplorePage" element={<ExplorePage />}/>
       <Route path='MoviePage/:id' element={<MoviePage />} />
       <Route path='Category' element={<Category />} />
+      <Route path="/SearchPage" element={<SearchPage />} />
     </Routes>
     </BrowserRouter>
     <Box  w={"100%"} h={"100vh"} >
